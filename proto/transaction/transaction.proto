@@ -1,15 +1,17 @@
 syntax = "proto3";
 
-option go_package = "https://github.com/Ayushaps1/my-grpc-proto/protogen/go";
+package transaction;
 
-message HelloRequest {
-  string name = 1;
+option go_package = "github.com/Ayushaps1/my-grpc-proto/protogen/go/transaction";
+
+message CartItem {
+  string item_uuid = 1 [json_name = "item_id"];
+  uint32 quantity = 2;
+  uint32 item_price = 3 [json_name = "item_price"];
+  bool taxable = 4;
 }
 
-message HelloResponse {
-  string greet = 1;
-}
-
-service HelloService {
-  rpc SayHello (HelloRequest) returns (HelloResponse) {}
+message Cart {
+  string cart_uuid = 1 [json_name = "cart_uuid"];
+  repeated CartItem items = 2;
 }
